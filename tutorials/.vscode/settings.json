@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "formula1.C": "cpp",
+        "plot.C": "cpp",
+        "plot2.C": "cpp",
+        "setPointPlot.C": "cpp",
+        "lesson3.C": "cpp",
+        "lesson4.C": "cpp",
+        "dice.C": "cpp",
+        "exampleData.C": "cpp",
+        "exampleDatav2.C": "cpp",
+        "fakePsdSlice.C": "cpp",
+        "test.C": "cpp",
+        "fakePsdSlice2.C": "cpp",
+        "fakePsdSlice2X.C": "cpp",
+        "fakePsdSlice3.C": "cpp",
+        "fakePsdSlice2D.C": "cpp"
+    }
+}

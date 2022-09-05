@@ -1,0 +1,57 @@
+New strcture of code
+[make a titled section for each of these]
+
+(0)
+Comment block, with author, date, etc.
+
+(1) 
+Processing constants and other constants (basically all the const types)
+
+(1.5)
+Output files (basically all the TFiles and ofstreams)
+	- Create a TFile to store the output
+
+(2)
+Functions for fitting and solutions (basically all the TF1)
+	- Define a TF1 for neutron PSD (single gaussian)
+	- Define a TF1 for photon PSD (single gaussian)
+	- Define a TF1 for combined (in terms of the other 2)
+	- Define a TF1 for the difference between neutrons and photons
+
+(2)
+define histograms (basically all the TH1, TH2 etc)
+
+(3)
+Fill the histograms (this loops through all the events and fills histograms)
+
+(4)
+Analysis of the histogram
+	- Clone the histograms and get guesses for the fit parameters (mean, amplitude, standardDeviations)
+
+(5)
+Fitting og the histograms 
+	- define the pointer for the fit
+	- use the parameters from (4) to inform the fit
+	- extract the parameters from the combined fit and set the parameters for the individual fits
+	- 
+
+(6)
+Discrimination line
+	- Apply the function defined in (1) to find the discrimination line
+	- Also find the discrimination line by finding where the difference between the neutron and the photon fit go to zero
+
+(7)
+Draw
+	- Create a canvas
+	- cd into the canvas
+	- draw the combined histograms
+	- draw all 4 fits: neutron, photon, sum, difference
+	- Define and draw three discrimination lines: middle, 2 stdDev from neutron, and 2 stdDev from photon
+	- Define a legend for the lines
+
+(8)
+Save
+	- Write the canvas
+	- Write the file
+	- Close the file
+

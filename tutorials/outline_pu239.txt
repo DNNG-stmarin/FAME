@@ -1,0 +1,60 @@
+
+
+  // information we have (input)
+shortListErgP: [  [detector number, energy], [detector number, energy], [detector number, energy], ......repeats # photons in that fission event  ]
+shortListErgN: [  [detector number, energy], [detector number, energy], [detector number, energy], ......repeats # neutrons in that fission event  ]
+
+  // create ergMultListP and ergMultListN:
+    [ [energy, mult] ]
+      write sorting algorithm for this from shortListErgN & P and get length of the array
+
+      ergNum = 0;
+      for (i = 0; i < nMult)
+      {
+        ergCheck = 0;
+        ergFlag = 1;
+        ergCheck = shortListErgN[i][1];
+
+        // Check if repeat energy
+        if (i != 0)
+        {
+          for (k = 1; k <= i)
+          {
+            if (ergCheck == shortListErgN[i-k][1])
+            {
+              continue;
+            }
+          }
+        }
+
+        // determine multiplicity of energy
+        for (j = i+1; j < nMult)
+        {
+          if (ergCheck == shortListErgN[j][1])
+          {
+            ergFlag++;
+          }
+        }
+
+        // Check for 0 multiplicities
+        if (ergFlag == 0)   // should never occur in this code structure
+        {
+          continue;
+        }
+
+        // Assign energy and mult
+        ergMultListN[ergNum][0] = shortListErgN[i][1];  // energy
+        ergMultListN[ergNum][1] = ergFlag;              // mult
+
+        // Iterate next entry number
+        ergNum++;
+      }
+
+      Tests:
+        1) sum of multiplicties should be the same as the length shortListErgN or P
+        2) Not repeated energy (one [energy, mult] for each)
+        3) No zero multiplcities
+        4) Print out ergMultListN & P and compare with shortListErgN & P
+
+  // Filling Matrices
+      Fill arrayExpErg with information contained within ergMultListN & P

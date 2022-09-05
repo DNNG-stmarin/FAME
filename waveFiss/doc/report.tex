@@ -1,0 +1,58 @@
+\documentclass[10pt]{article}
+\usepackage[hmargin=0.8in,vmargin=0.8in]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[normalem]{ulem}
+\usepackage{multirow}
+
+\begin{document}
+
+    %\pagenumbering{gobble}
+    \begin{center}
+        \textbf{\LARGE{TKE analysis software usage}}
+
+        \large{Tues. 10/1/2013}
+
+        \large{Shea Mosby}
+    \end{center}
+
+%hello \verb#hello#
+This is a very short intro on how to use the analysis tools I've written so far. In case you're looking at this somewhere random (like and email or our elog) the location of this software is \verb#daq@fission1daq:tke_analysis# and this document is located in the \verb#doc# subdirectory off of that. You'll need to copy the \verb#tke_analysis# directory in to your own analysis directory to use it. Midas files are currently located in \verb#/mnt/hygd-data/7/tke#
+
+All the tools we're using right now are compiled, command line driven applications. As such they're faster than ROOT macros, but less flexible since all the analysis parameters are part of the executable. There are 3 applications which perform the major steps to get from midas files and waveforms to energies and times which we actually want to look at.
+
+The first step is \verb#analyzer# which unpacks the midas files and dumps them into a root tree. You run like: \verb#./analyzer <ipath> <opath># where the paths are the midas file you want to read from and the root file you want to create respectively. The resulting root tree has board number, channel number, trigger timestamp, and waveform branches - this is the complete set of information which is read from the digitizers. You build this application with the \verb#MakeAnalyzer# script.
+
+
+The second step is \verb#singlesprocessing# which converts the waveforms into energies and times. You run like: \verb#./singlesprocessing <ipath> <opath>#. For "convenience" later down the road, it writes out a tree for each digitizer channel you're using. The naming scheme for the output trees is \verb#pt<bnum>_<chnum>#. It writes out the board and channel numbers, trigger timestamp, and the energy, time, and baseline for each waveform. Time within a waveform is where exactly within the waveform the peak was observed. You must add the trigger timestamp to the waveform time to get accurate time of flight for example. Parameter map:
+
+\begin{itemize}
+\item bnum = board number
+\item chnum = channel number
+\item ts = trigger timestamp
+\item peak = energy information whether it's a pulse height analysis or charge integration
+\item baseline = the baseline of the signal
+\end{itemize}
+
+You build this application with the \verb#MakeSinglesProcessing# script.
+
+The third step is to build physics events. I have an application which does this for the ionization chamber called \verb#eventbuild#. You run like: \verb#./eventbuild <ipath> <opath>#. This collects coincident events from the different channels and builds them into a new output tree. In the output tree, each entry is a physics event. parameter map:
+
+\begin{itemize}
+\item t0t = relevant t0 time
+\item ct = cathode time
+\item dt = time of flight between t0 and cathode
+\item cph = cathode pulse height
+\item aph = anode pulse heights
+\item gph = grid pulse heights
+\end{itemize}
+
+the rest of the parameters are irrelevant. You build this application with \verb#MakeEventBuild# script.
+
+I have an elog entry which shows what some of the spectra should look like.
+
+
+The other files in the directory are convenience scripts that I find helpful. You can take them or leave them.
+
+
+\end{document}

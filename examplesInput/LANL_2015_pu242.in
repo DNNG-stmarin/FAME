@@ -1,0 +1,80 @@
+# Input file for ROOT_FAME processing
+# Authors: Isabel hernandez, Stefano Marin
+# Contact: isabelhz@umich.edu, stmarin@umich.edu
+# Date: September 2020, University of Michigan Ann Arbor
+# Usage: Complete the following sections to provide ROOT_FAME
+#        with the informations needed to process the experimental data
+
+###
+Personal comments by user can go in here
+###
+<NAME>: experiment
+
+# specify minimum file and maximum file to be analyzed
+<MIN_FILE>: 034457
+<NUM_FILES>: 1
+
+# specify the data type being analyzed (either MIDAS/COMPASS (1/0))
+# specify whether to reuse already processed data (either NO/YES (0/1))
+<DATA_TYPE>: 1
+<REUSE_DATA>: 0
+
+# specify where to find the information on the system
+<DETECTOR_PATH>: expParameters/cartesian.txt
+<CALIBRATION_PATH>: expParameters/intCalibrationCs.txt
+
+# number of beam channels
+<NUM_BEAMS>: 0
+<BEAMS>:
+
+# number of detector channels, separated by space
+<NUM_DETS>: 50
+<DETECTORS>: 9 10 11 12 13 14 15 16 25 26 27 28 29 30 31 32 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78
+
+
+#number of fission target channels
+<NUM_TRIGGERS>: 10
+<CHAMBERS>: 5 6 7 8 21 22 23 24 37 38
+
+#number of excluded detector channels
+<NUM_EXCLUDED>: 0
+<EXCLUDE_DETECTORS>:
+
+###
+# PROCESSING constants
+###
+# coincidence window in nanoseconds
+<COINC_WINDOW>: 500
+
+# limit on the acceptance of the detector threshold
+<DETECTOR_THRESHOLD>: 0.1
+
+# limit on the acceptance of the fission signal in V us
+<TRIGGER_THRESHOLD>: 0.000325
+<TRIGGER_CLIP>: 0.001965
+
+# specify whether trigger is cloned (either independent or cloned (0/1))
+# for cloned fission target channels, specify the maximum
+# time difference between clones in nanoseconds
+<TRIGGER_SPLIT>: 0
+<MAX_TRIGGER_DRIFT>: 1
+
+# time limits for the collection of neutrons and photons, all in nanoseconds
+<MIN_TIME_P>: -5.0
+<MAX_TIME_P>: 10.0
+<MIN_TIME_N>: 20.0
+<MAX_TIME_N>: 150.0
+
+# introduce a further delay to the background window, so that it ends DELTA nanoseconds before the start of the signal
+<DELTA_BACK_SIG>: 10.0
+
+
+###
+# MODES of OPERATION
+###
+
+# turn on/off (1/0) debug mode to print out many more info while system processes
+<DEBUG>: 0
+
+# turn on/off (1/0) energy independent analysis of PSD
+<PSD_ERG>: 0
